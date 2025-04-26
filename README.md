@@ -24,77 +24,88 @@ A console-based Personal Finance Management System developed in Java that helps 
 
 ## Core Features Implementation
 
-### 1. Transaction Management
+### 1. Overloaded Methods
 ```java
-// In Transaction.java (Abstract Class)
-public abstract class Transaction {
-    protected Double amount;  // Wrapper class usage
-    protected String category;
-    protected Date date;
-    
-    // Overloaded constructors
-    public Transaction() {
-        this(0.0, "Uncategorized");
+// In User.java
+public class User {
+    // Method overloading for adding transactions
+    public void addTransaction(Transaction transaction) {
+        transactions.add(transaction);
+        updateBalance();
     }
     
-    public Transaction(double amount) {
-        this(amount, "Uncategorized");
+    public void addTransaction(Transaction... transactions) {
+        for (Transaction t : transactions) {
+            this.transactions.add(t);
+        }
+        updateBalance();
     }
     
-    public Transaction(double amount, String category) {
-        this.amount = amount;
-        this.category = category;
-        this.date = new Date();
+    // Method overloading for setting preferences
+    public void setPreferences(String currency) {
+        preferences.setCurrency(currency);
     }
     
-    public abstract String getType();
+    public void setPreferences(String currency, String dateFormat) {
+        preferences.setCurrency(currency);
+        preferences.setDateFormat(dateFormat);
+    }
 }
 ```
 
-### 2. Budget Management with Nested Class
+### 2. Overloaded Constructors
 ```java
 // In Budget.java
 public class Budget {
     private String name;
     private Double amount;
-    private String period;  // Monthly, Weekly, Daily
+    private String period;
     
-    // Nested static class for budget calculations
-    public static class BudgetCalculator {
-        public static double calculatePeriodAmount(Budget budget, String targetPeriod) {
-            double amount = budget.getAmount();
-            String currentPeriod = budget.getPeriod();
-            
-            // Convert to daily amount first
-            double dailyAmount = switch (currentPeriod.toLowerCase()) {
-                case "monthly" -> amount / 30.0;
-                case "weekly" -> amount / 7.0;
-                case "daily" -> amount;
-                default -> amount;
-            };
-            
-            // Convert to target period
-            return switch (targetPeriod.toLowerCase()) {
-                case "monthly" -> dailyAmount * 30;
-                case "weekly" -> dailyAmount * 7;
-                case "daily" -> dailyAmount;
-                default -> amount;
-            };
+    // Constructor overloading
+    public Budget() {
+        this("Default Budget", 0.0, "Monthly");
+    }
+    
+    public Budget(String name) {
+        this(name, 0.0, "Monthly");
+    }
+    
+    public Budget(String name, double amount) {
+        this(name, amount, "Monthly");
+    }
+    
+    public Budget(String name, double amount, String period) {
+        this.name = name;
+        this.amount = amount;
+        this.period = period;
+    }
+}
+```
+
+### 3. Vararg Overloading
+```java
+// In FinancialManager.java
+public class FinancialManager {
+    // Vararg method for adding multiple transactions
+    public void addTransactions(Transaction... transactions) {
+        for (Transaction t : transactions) {
+            this.transactions.add(t);
+        }
+    }
+    
+    // Vararg method for generating reports
+    public void generateReports(String... reportTypes) {
+        for (String type : reportTypes) {
+            generateReport(type);
         }
     }
 }
 ```
 
-### 3. User Authentication with Multiple Inheritance
+### 4. Nested Classes
 ```java
 // In User.java
-public class User implements Authentication {
-    private String name;
-    private String username;
-    private String password;
-    private Double balance;
-    private boolean authenticated;
-    
+public class User {
     // Nested class for user preferences
     public class UserPreferences {
         private String currency;
@@ -108,18 +119,137 @@ public class User implements Authentication {
         }
     }
     
-    @Override
-    public boolean authenticate(String username, String password) {
-        if (this.username.equals(username) && this.password.equals(password)) {
-            authenticated = true;
-            return true;
-        }
-        return false;
+    // Nested interface for authentication
+    public interface Authentication {
+        boolean authenticate(String username, String password);
     }
 }
 ```
 
-### 4. Exception Handling
+### 5. Abstract Class
+```java
+// In Transaction.java
+public abstract class Transaction {
+    protected Double amount;
+    protected String category;
+    protected Date date;
+    
+    public Transaction(double amount, String category) {
+        this.amount = amount;
+        this.category = category;
+        this.date = new Date();
+    }
+    
+    public abstract String getType();
+    public abstract void process();
+}
+```
+
+### 6. Interface
+```java
+// In Exportable.java
+public interface Exportable {
+    void exportToFile(String filename) throws IOException;
+    String generateExportData();
+}
+
+// In Authentication.java
+public interface Authentication {
+    boolean authenticate(String username, String password);
+    void logout();
+}
+```
+
+### 7. Hierarchical Inheritance
+```java
+// In Transaction.java (Abstract class)
+public abstract class Transaction {
+    protected Double amount;
+    protected String category;
+    protected Date date;
+}
+
+// In Income.java
+public class Income extends Transaction {
+    private String source;
+    
+    public Income(double amount, String category, String source) {
+        super(amount, category);
+        this.source = source;
+    }
+    
+    @Override
+    public String getType() {
+        return "Income";
+    }
+}
+
+// In Expense.java
+public class Expense extends Transaction {
+    private String paymentMethod;
+    
+    public Expense(double amount, String category, String paymentMethod) {
+        super(amount, category);
+        this.paymentMethod = paymentMethod;
+    }
+    
+    @Override
+    public String getType() {
+        return "Expense";
+    }
+}
+```
+
+### 8. Multiple Inheritance
+```java
+// In User.java
+public class User implements Authentication, Exportable {
+    // Implementation of Authentication interface
+    @Override
+    public boolean authenticate(String username, String password) {
+        return this.username.equals(username) && this.password.equals(password);
+    }
+    
+    // Implementation of Exportable interface
+    @Override
+    public void exportToFile(String filename) throws IOException {
+        // Implementation
+    }
+}
+```
+
+### 9. Wrappers
+```java
+// In Budget.java
+public class Budget {
+    private Double amount;  // Wrapper class
+    private Integer periodDays;  // Wrapper class
+    
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+    
+    public void setPeriodDays(Integer days) {
+        this.periodDays = days;
+    }
+}
+```
+
+### 10. Package
+```java
+// All files are in the com.finance package
+package com.finance;
+
+// Package structure
+// src/com/finance/
+// ├── model/
+// ├── service/
+// ├── interfaces/
+// ├── exceptions/
+// └── util/
+```
+
+### 11. Exception Handling
 ```java
 // In exceptions/InvalidAmountException.java
 public class InvalidAmountException extends Exception {
@@ -134,9 +264,38 @@ public class BudgetExceededException extends Exception {
         super(message);
     }
 }
+
+// Usage in FinancialManager.java
+public void addTransaction(Transaction transaction) throws InvalidAmountException {
+    if (transaction.getAmount() <= 0) {
+        throw new InvalidAmountException("Amount must be positive");
+    }
+    // Process transaction
+}
 ```
 
-### 5. Multithreading Implementation
+### 12. I/O Operations
+```java
+// In FinancialManager.java
+public class FinancialManager {
+    // File handling
+    public void saveToFile(String filename) throws IOException {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write(generateExportData());
+        }
+    }
+    
+    // Scanner usage
+    public void readUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter amount: ");
+        double amount = scanner.nextDouble();
+        // Process input
+    }
+}
+```
+
+### 13. Multithreading
 ```java
 // In Notification.java
 public class Notification implements Runnable {
@@ -165,73 +324,13 @@ public class Notification implements Runnable {
         // Implementation for budget alerts
     }
 }
-```
 
-### 6. File Operations and Data Export
-```java
-// In FinancialManager.java
-public class FinancialManager implements Exportable {
-    public void exportToFile(String filename) throws IOException {
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(generateExportData());
-        }
-    }
-    
-    private String generateExportData() {
-        StringBuilder sb = new StringBuilder();
-        // Implementation for data export
-        return sb.toString();
+// Usage in Main.java
+public class Main {
+    public static void main(String[] args) {
+        User user = new User();
+        Thread notificationThread = new Thread(new Notification(user));
+        notificationThread.start();
     }
 }
 ```
-
-## Project Structure
-```
-src/com/finance/
-├── model/
-│   ├── Transaction.java (Abstract class)
-│   ├── Income.java
-│   ├── Expense.java
-│   ├── User.java
-│   └── Budget.java
-├── service/
-│   ├── FinancialManager.java
-│   ├── ReportGenerator.java
-│   └── Notification.java
-├── interfaces/
-│   ├── Authentication.java
-│   └── Exportable.java
-├── exceptions/
-│   ├── InvalidAmountException.java
-│   └── BudgetExceededException.java
-├── util/
-│   └── DataVisualizer.java
-└── Main.java
-```
-
-## Usage Instructions
-
-1. **Compilation**
-   ```bash
-   javac -d . src/com/finance/*.java src/com/finance/**/*.java
-   ```
-
-2. **Execution**
-   ```bash
-   java com.finance.Main
-   ```
-
-## Development Guidelines
-- Follow Java coding conventions
-- Maintain proper documentation
-- Use meaningful variable names
-- Implement proper error handling
-- Follow OOP principles
-- Ensure code reusability
-
-## Dependencies
-- Java SE 8 or higher
-- Standard Java libraries
-
-## License
-This project is for educational purposes only.

@@ -60,13 +60,16 @@ public class Main {
                     System.out.print("Enter category: ");
                     String incomeCategory = scanner.nextLine();
                     
+                    System.out.print("Enter source: ");
+                    String incomeSource = scanner.nextLine();
+                    
                     try {
                         // Condition XI: Exception handling
                         if (incomeAmount <= 0) {
                             throw new InvalidAmountException("Income amount must be positive!");
                         }
                         
-                        Income income = new Income(incomeAmount, incomeCategory);
+                        Income income = new Income(incomeAmount, incomeCategory, incomeSource);
                         manager.addTransaction(income);
                         System.out.println("Income added successfully!");
                     } catch (InvalidAmountException e) {
