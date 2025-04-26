@@ -1,0 +1,8 @@
+User: pranay
+Balance: $9989.0
+
+--- Transactions ---
+1. Expense: $11.0 - Category: food - Date: Thu Apr 24 03:39:20 IST 2025 - Necessary: Yes
+
+Total Income: $0.0
+Total Expense: $11.0
