@@ -1,0 +1,172 @@
+Personal Finance Management System
+CSF231 - Object Oriented Programming Project
+
+1. Introduction
+---------------
+The Personal Finance Management System is a comprehensive Java-based application designed to help users effectively manage their financial activities. This system provides a robust solution for tracking income, expenses, budgets, and financial goals while ensuring data security and privacy.
+
+2. System Overview
+-----------------
+2.1 Purpose
+The system aims to:
+- Simplify financial tracking and management
+- Provide real-time insights into financial health
+- Enable better budget planning and control
+- Ensure secure data handling
+- Automate recurring financial tasks
+
+2.2 Key Features
+- Income and Expense Tracking
+  * Multiple income sources
+  * Categorized expenses
+  * Transaction history
+  * Real-time balance updates
+
+- Budget Management
+  * Flexible budget periods (fortnightly/monthly/trimester)
+  * Category-wise budget allocation
+  * Budget alerts and notifications
+  * Budget vs actual analysis
+
+- Financial Analysis
+  * Spending patterns
+  * Income trends
+  * Savings tracking
+  * Financial health indicators
+
+- Security Features
+  * Secure authentication
+  * Data encryption
+  * Cloud backup
+  * Privacy protection
+
+- Automation
+  * Recurring bill payments
+  * Subscription management
+  * Loan repayment tracking
+  * Automated notifications
+
+3. Technical Implementation
+--------------------------
+3.1 System Architecture
+The system is built using:
+- Java SE 8 or higher
+- Object-Oriented Programming principles
+- Standard Java libraries
+- File-based data storage
+
+3.2 Core Components
+- Transaction Management System
+- User Authentication System
+- Budget Management System
+- Financial Analysis Engine
+- Notification System
+- Data Export System
+
+4. OOP Implementation Details
+----------------------------
+4.1 Class Structure
+The system implements the following OOP concepts:
+
+1. Overloaded Methods
+   - User.addTransaction()
+   - FinancialManager.addTransaction()
+   - Budget.setAmount()
+
+2. Overloaded Constructors
+   - User()
+   - Budget()
+   - Transaction()
+
+3. Vararg Overloading
+   - User.addTransaction(Transaction...)
+   - FinancialManager.addTransaction(Transaction...)
+
+4. Nested Classes
+   - Budget.BudgetCalculator
+   - User.UserPreferences
+
+5. Abstract Class
+   - Transaction
+
+6. Interface
+   - Authentication
+   - Exportable
+
+7. Hierarchical Inheritance
+   - Transaction → Income/Expense
+
+8. Multiple Inheritance
+   - User implements Authentication
+   - FinancialManager implements Exportable
+
+9. Wrappers
+   - Double
+   - Integer
+
+10. Package
+    - com.finance
+
+11. Exception Handling
+    - InvalidAmountException
+    - BudgetExceededException
+
+12. I/O Operations
+    - File handling
+    - Scanner class
+
+13. Multithreading
+    - Notification implements Runnable
+
+5. Implementation Table
+----------------------
+| Requirement | Implementation | Count | Location |
+|------------|---------------|-------|----------|
+| I. Overloaded Methods | User.addTransaction(), FinancialManager.addTransaction(), Budget.setAmount() | 3 | User.java, FinancialManager.java, Budget.java |
+| II. Overloaded Constructors | User(), Budget(), Transaction() | 3 | User.java, Budget.java, Transaction.java |
+| III. Vararg Overloading | User.addTransaction(Transaction...), FinancialManager.addTransaction(Transaction...) | 2 | User.java, FinancialManager.java |
+| IV. Nested Classes | Budget.BudgetCalculator, User.UserPreferences | 2 | Budget.java, User.java |
+| V. Abstract Class | Transaction | 1 | Transaction.java |
+| VI. Interface | Authentication, Exportable | 2 | Authentication.java, Exportable.java |
+| VII. Hierarchical Inheritance | Transaction → Income/Expense | 1 | Transaction.java, Income.java, Expense.java |
+| VIII. Multiple Inheritance | User implements Authentication, FinancialManager implements Exportable | 2 | User.java, FinancialManager.java |
+| IX. Wrappers | Double, Integer | 2 | Various files |
+| X. Package | com.finance | 1 | All files |
+| XI. Exception Handling | InvalidAmountException, BudgetExceededException | 2 | exceptions/ |
+| XII. I/O Operations | File handling, Scanner class | 2 | FinancialManager.java, Main.java |
+| XIII. Multithreading | Notification implements Runnable | 1 | Notification.java |
+
+6. UML Diagram
+-------------
+[Insert UML Diagram Here]
+
+7. Code Implementation
+---------------------
+[Insert Code Implementation Here]
+
+8. Testing and Validation
+------------------------
+8.1 Testing Methodology
+- Unit testing of individual components
+- Integration testing of system modules
+- User interface testing
+- Security testing
+- Performance testing
+
+8.2 Validation Results
+- All OOP requirements implemented
+- System functionality verified
+- Security measures validated
+- Performance metrics achieved
+
+9. Future Enhancements
+---------------------
+1. Mobile Application Development
+2. Web Interface Implementation
+3. Advanced Analytics Features
+4. Integration with Banking APIs
+5. AI-powered Financial Recommendations
+
+10. Conclusion
+-------------
+The Personal Finance Management System successfully implements all required OOP concepts while providing a comprehensive solution for financial management. The system's modular design allows for easy expansion and future enhancements. 
