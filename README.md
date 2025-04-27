@@ -1,24 +1,30 @@
 # Personal Finance Management System
 ## CSF231 - Object Oriented Programming Project
 
+## Team Members
+- PRANAY CHAKRAVARTY
+- ADITYA KHEMKA
+- AMAN DASH
+- RAGHAVAN TOSHNIWAL
+
 ## Project Overview
-A console-based Personal Finance Management System developed in Java that helps users track their income, expenses, and budgets efficiently. The system provides comprehensive financial tracking capabilities with features for managing multiple income sources, categorizing expenses, setting budgets, and generating reports.
+A console-based Personal Finance Management System developed in Java that helps users track their income, expenses, and budgets efficiently. The system provides financial tracking capabilities with features for managing transactions, categorizing expenses, setting budgets, and generating reports.
 
 ## Academic Requirements Implementation
 
 | Requirement | Implementation | Count | File/Location |
 |------------|---------------|-------|---------------|
-| I. Overloaded Methods | `User.addTransaction()`, `FinancialManager.addTransaction()`, `Budget.setAmount()` | 3 | User.java, FinancialManager.java, Budget.java |
-| II. Overloaded Constructors | `User()`, `Budget()`, `Transaction()` | 3 | User.java, Budget.java, Transaction.java |
-| III. Vararg Overloading | `User.addTransaction(Transaction...)`, `FinancialManager.addTransaction(Transaction...)` | 2 | User.java, FinancialManager.java |
-| IV. Nested Classes | `Budget.BudgetCalculator`, `User.UserPreferences` | 2 | Budget.java, User.java |
+| I. Overloaded Methods | `User.addTransaction()`, `FinancialManager.addTransaction()`, `Notification.sendNotification()` | 3 | User.java, FinancialManager.java, Notification.java |
+| II. Overloaded Constructors | `User()`, `Budget()`, `Expense()` | 3 | User.java, Budget.java, Expense.java |
+| III. Vararg Overloading | `User.addTransaction(Transaction...)`, `FinancialManager.addTransaction(Transaction...)`, `DataVisualizer.compareBudgets(Budget...)` | 3 | User.java, FinancialManager.java, DataVisualizer.java |
+| IV. Nested Classes | `Budget.BudgetCalculator` | 1 | Budget.java |
 | V. Abstract Class | `Transaction` | 1 | Transaction.java |
 | VI. Interface | `Authentication`, `Exportable` | 2 | Authentication.java, Exportable.java |
 | VII. Hierarchical Inheritance | `Transaction` → `Income`/`Expense` | 1 | Transaction.java, Income.java, Expense.java |
-| VIII. Multiple Inheritance | `User implements Authentication`, `FinancialManager implements Exportable` | 2 | User.java, FinancialManager.java |
+| VIII. Multiple Inheritance | `User implements Authentication`, `ReportGenerator implements Exportable` | 2 | User.java, ReportGenerator.java |
 | IX. Wrappers | `Double`, `Integer` | 2 | Various files |
 | X. Package | `com.finance` | 1 | All files |
-| XI. Exception Handling | `InvalidAmountException`, `BudgetExceededException` | 2 | exceptions/ |
+| XI. Exception Handling | `InvalidAmountException` | 1 | exceptions/ |
 | XII. I/O Operations | File handling, Scanner class | 2 | FinancialManager.java, Main.java |
 | XIII. Multithreading | `Notification implements Runnable` | 1 | Notification.java |
 
@@ -254,13 +260,6 @@ package com.finance;
 // In exceptions/InvalidAmountException.java
 public class InvalidAmountException extends Exception {
     public InvalidAmountException(String message) {
-        super(message);
-    }
-}
-
-// In exceptions/BudgetExceededException.java
-public class BudgetExceededException extends Exception {
-    public BudgetExceededException(String message) {
         super(message);
     }
 }
